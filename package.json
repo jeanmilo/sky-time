@@ -1,0 +1,21 @@
+{
+  "name": "sky-timer",
+  "productName": "Time Flies By",
+  "version": "1.0.0",
+  "description": "A cockatiel shaped desktop countdown timer made for Skylar. When you're an adult, time will fly by really quickly, so use this timer to stay on track! I hope u enjoy it, Skylar! - Dia.",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "package": "electron-builder"
+  },
+  "devDependencies": {
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "com.diayamamoto.skytimer",
+    "files": [ 
+      "src/**/*"
+    ]
+  }
+}

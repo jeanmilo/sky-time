@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    --grey: #b9bcc4;
+    --grey-dark: #8f939d;
+    --grey-shadow: #6f737d;
+    --yellow: #f6d98a;
+    --yellow-deep: #e8bf5c;
+    --cheek: #de7b4e;
+    --beak: #d9c7a8;
+    --ink: #4a4034;
+    --lcd: #3d3529;
+  }
+
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    user-select: none;
+    font-family: 'Avenir Next', -apple-system, 'Segoe UI', sans-serif;
+  }
+
+  #shell {
+    position: relative;
+    width: 300px;
+    height: 460px;
+  }
+
+  svg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1; 
+  }
+
+  /* only the bird's body is draggable */
+  #birdbody {
+    position: absolute;
+    inset: 0; 
+    z-index: 0; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 450px;
+    -webkit-app-region: drag;
+  }
+
+  #displayHit {
+    position: absolute;
+    left: 90px; top: 227px;
+    width: 120px; height: 50px;
+    border-radius: 14px;
+    cursor: pointer;
+    z-index: 2;
+    -webkit-app-region: no-drag;
+  }
+
+  .time-input {
+    display: none;
+    position: absolute;
+    left: 90px; top: 227px;
+    width: 120px; height: 50px;
+    line-height: 50px; /* == height, so text centers vertically like dominant-baseline="middle" does on the SVG */
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    z-index: 2;
+    -webkit-app-region: no-drag;
+    border: none;
+    outline: none;
+    background: transparent;
+    text-align: center;
+    font-family: 'Avenir Next', -apple-system, sans-serif;
+    font-size: 40px; /* was 34px — now matches #display exactly */
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--lcd);
+    caret-color: var(--lcd);
+  }
+
+  .time-input::selection {
+    background: var(--yellow); /* was the default OS blue highlight — now uses the app's own palette */
+    color: var(--lcd);
+  }
+
+  #shell.editing #display { opacity: 0; }
+  #shell.editing #displayHit { pointer-events: none; }
+  #shell.editing .time-input { display: block; }
+
+
+  .btn {
+    position: absolute;
+    -webkit-app-region: no-drag;
+    background: rgba(255, 255, 255, 0.55);
+    border: 1px solid var(--grey-shadow);
+    border-radius: 999px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    transition: background 100ms ease, transform 100ms ease;
+  }
+
+  .btn:hover { background: #fff; }
+  .btn:active { transform: scale(0.94); }
+  .btn:focus-visible { outline: 2px solid var(--cheek); outline-offset: 2px; }
+
+  #controls {
+    z-index: 2;
+    position: absolute;
+    top: 296px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+  }
+  #minus, #plus {
+    position:relative;
+    width: 26px; height: 26px;
+    font-size: 15px;
+    line-height: 1;
+  }
+
+  #startStop {
+    position:relative;
+    width: 68px; height: 34px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 10px;
+  }
+
+  #reset {
+    z-index: 2;
+    margin: 0 auto;
+    width: 46px; height: 20px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    left: 0; right: 0; top: 334px;
+    align-items: center;
+    text-transform: uppercase;
+    background: transparent;
+    border-color: transparent;
+    color: var(--lcd);
+  }
+  #reset:hover { background: rgba(255,255,255,0.5); border-color: var(--grey-shadow); }
+
+  #quit {
+    z-index: 2;
+    left: 220px; top: 70px;
+    width: 40px; height: 40px;
+    font-size: 25px;
+    line-height: 0.5;
+    background: rgba(255,255,255,0.35);
+    color: var(--yellow-deep);
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+  #shell:hover #quit { opacity: 1; }
+
+  .preset {
+    z-index: 2;
+    position: absolute;
+    top: 402px;
+    width: 44px; height: 22px;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+  }

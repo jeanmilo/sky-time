@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sky Timer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+<!-- text -->
+<div id="shell">
+  <svg viewBox="0 0 300 460" width="300" height="460" xmlns="http://www.w3.org/2000/svg">
+    <text id="display" x="150" y="252"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="'Avenir Next', -apple-system, sans-serif"
+          font-size="40" font-weight="600" fill="var(--lcd)"
+          letter-spacing="1">00:00</text>
+    <text id="statusLabel" x="150" y="222"
+          text-anchor="middle" dominant-baseline="middle"
+          font-family="'Avenir Next', -apple-system, sans-serif"
+          font-size="9" fill="var(--grey-shadow)"
+          letter-spacing="3">READY</text>
+  </svg>
+
+  <div id="birdbody">
+  </div>
+
+  <div id="displayHit" role="button" tabindex="0"></div>
+  <input id="timeInput" class="time-input" type="text" inputmode="text"
+         maxlength="5" autocomplete="off" spellcheck="false" aria-label="set timer duration" />
+
+  <div id="controls">
+    <button id="minus" class="btn" type="button" title="subtract a minute">-</button>
+    <button id="startStop" class="btn" type="button">start</button>
+    <button id="plus" class="btn" type="button" title="add a minute">+</button>
+  </div>
+  
+  <button id="reset" class="btn" type="button">reset</button>
+
+  <button id="quit" class="btn" type="button">x</button>
+</div>
+
+<script src="timer.js"></script>
