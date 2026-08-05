@@ -42,7 +42,7 @@
     z-index: 0; 
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 450px;
+    background-size: 390px; /* make this 450px if you are using the other set of pics */
     -webkit-app-region: drag;
   }
 
@@ -145,7 +145,6 @@
     left: 0; right: 0; top: 334px;
     align-items: center;
     text-transform: uppercase;
-    background: transparent;
     border-color: transparent;
     color: var(--lcd);
   }
