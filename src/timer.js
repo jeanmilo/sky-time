@@ -89,6 +89,7 @@ function pause() {
 
 function reset() {
   stop();
+  stopAlarmRepeat();
   shellEl.classList.remove('done');
   stopFlip();
   remainingMs = durationMs;
@@ -97,6 +98,7 @@ function reset() {
 
 function setTime(ms) {
   stop();
+  stopAlarmRepeat();
   shellEl.classList.remove('done');
   stopFlip();
   durationMs = remainingMs = ms;
@@ -112,6 +114,7 @@ function adjustMinutes(delta) {
   remainingMs = next;
   if (running) endsAt = Date.now() + next;
   else durationMs = next;
+  stopAlarmRepeat();
   shellEl.classList.remove('done');
   stopFlip();
   render();
@@ -123,7 +126,7 @@ function finish() {
   shellEl.classList.add('done');
   startFlip();
   render();
-  chirp();
+  startAlarmRepeat();
   api.alarm?.();
 }
 
@@ -209,13 +212,34 @@ function chirp() {
 
   });
 }
+const ALARM_INTERVAL_MS = 2500;
+const ALARM_MAX_REPEATS = 12; // ~30s of nagging, then it gives up
+
+let alarmTimer = null;
+let alarmCount = 0;
+
+function startAlarmRepeat() {
+  stopAlarmRepeat();
+  alarmCount = 0;
+  chirp();
+  alarmTimer = setInterval(() => {
+    if (++alarmCount >= ALARM_MAX_REPEATS) return stopAlarmRepeat();
+    chirp();
+  }, ALARM_INTERVAL_MS);
+}
+
+function stopAlarmRepeat() {
+  clearInterval(alarmTimer);
+  alarmTimer = null;
+  alarmCount = 0;
+}
 
 // ---- wiring -----
 const clicks = {
   displayHit: openEditor,
   startStop: toggle,
-  minus: () => adjustMinutes(-1),
-  plus: () => adjustMinutes(1),
+  minus: () => adjustMinutes(-0.5),
+  plus: () => adjustMinutes(.5),
   reset,
   quit: () => (api.quit ? api.quit() : window.close())
 };
@@ -239,8 +263,8 @@ timeInput.addEventListener('blur', commitTimeInput);
 const keys = {
   Space: toggle,
   KeyR: reset,
-  ArrowUp: () => adjustMinutes(1),
-  ArrowDown: () => adjustMinutes(-1)
+  ArrowUp: () => adjustMinutes(0.5),
+  ArrowDown: () => adjustMinutes(-0.5)
 };
 
 window.addEventListener('keydown', (e) => {

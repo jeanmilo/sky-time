@@ -1,4 +1,4 @@
-# Sky Timer: Time Flies By
+# Sky Timer: Time Flies
 
 <img width="454" height="512" z-index="1000" align="left" alt="Screenshot of Sky Timer" src="https://github.com/user-attachments/assets/ecff6012-4a28-45eb-bc56-7c5ba77a5813" />
 
